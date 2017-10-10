@@ -1,0 +1,45 @@
+<div class="container-fluid" style="color:white" *ngIf="artista">
+    <div class="row text-center">
+      <div class="col-md-4 mt-5">
+        <div class="col-xs-12 text-center">
+          <img [src]="artista?.images | sinfoto" alt="" class="img-fluid img-circle">
+        </div>
+        <div class="col-xs-12">
+          <h1 class="">{{artista.name}}</h1>
+        </div>
+        <div class="col-xs-12">
+          <p class="gray">Followers: {{artista.followers.total}} </p>
+        </div>
+        <div class="col-xs-12 mt-3">
+          <a  href="{{artista.external_urls?.spotify}}" target="_blank" class="btn btn-success  buttons-spotify">View in Spotify</a>
+        </div>
+        <div class="col-xs-12 mt-3 text-center">
+            <a [routerLink]="['/search']" class="btn btn-outline-success  buttons-spotify">Back</a>
+        </div>
+      </div>
+      <div class="col-md-8 text-center mt-5">
+        <div class="col-xs-12 text-center">
+          <h3 >Popular of {{artista.name}}</h3>
+          <table class="table table-inverse" >
+            <tbody>
+              <tr class="gray" *ngFor="let pista of pistas | slice:0:5;">
+                <td>
+                  <img [src]="pista.album.images[0]?.url" alt="" class="img-fluid  img-track ">
+                </td>
+                <td><p>{{pista.album.name}}</p></td>
+                <td><p>{{pista.name}}</p></td>
+                <td><p>{{pista.duration_ms | date:'mm:ss'}}</p></td>
+                <td>
+                  <!-- <audio controls>
+                    <source [src]="pista.preview_url">
+                  </audio> -->
+                  <iframe [src]="pista.uri | domseguro:'https://open.spotify.com/embed?uri='" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
+                </td>
+              </tr>
+            </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+
+</div>
